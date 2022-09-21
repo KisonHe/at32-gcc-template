@@ -14,6 +14,11 @@ AT32 GCC Demo
 #. cmake
 #. arm-none-eabi 工具链
 
+支持Segger相关工具辨识AT32 MCU
+****************************************
+
+AT32官方带了一个工具 https://www.arterytek.com/cn/product/AT32F403A.jsp#Resource 用来支持Segger相关工具可辨识AT32 MCU，实质是向 `/opt/SEGGER/JLink/JLinkDevices.xml` 添加了AT32的设备并拷贝了对应的FLM文件（到/opt/SEGGER/JLink/Devices/ArteryTek/AT32FLM/）。这里提供更改后的xml文件，以及FLM作参考，工具仅修改了xml文件最后的行数。
+
 编译样本工程
 ************
 
