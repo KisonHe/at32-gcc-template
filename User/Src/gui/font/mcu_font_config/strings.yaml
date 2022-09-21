@@ -21,6 +21,14 @@ Fonts:
 
 
 Strings:
+  - ID: ui-font-placebo
+    Content-all: # Translate for all Languages
+      Font: ui
+      Value: ""
+  - ID: ui-big-font-placebo
+    Content-all: # Translate for all Languages
+      Font: ui-big
+      Value: ""
   - ID: ParkIcon
     Content-all:    # all Languages 的值
       Font: icon

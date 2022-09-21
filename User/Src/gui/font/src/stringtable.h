@@ -18,7 +18,7 @@ namespace strings
     }Language_t;
 
     typedef enum : uint16_t {
-        ParkIcon, FollowIcon, ManualIcon, EmergIcon, NotificationIcon, Unit, WarnText, EmerStopText, BootWaitText, ObsStopText,  EndOfTexts
+        ui_font_placebo, ui_big_font_placebo, ParkIcon, FollowIcon, ManualIcon, EmergIcon, NotificationIcon, Unit, WarnText, EmerStopText, BootWaitText, ObsStopText,  EndOfTexts
     }ID;
 
     enum FontID : uint8_t {

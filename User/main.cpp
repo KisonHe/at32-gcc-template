@@ -15,16 +15,86 @@
 
 #include "lvgl.h"
 #include "demos/lv_demos.h"
+#include "Src/gui/font/src/stringtable.h"
 
 // FreeRTOS使用systick,at32带的这几个延时会搞爆FreeRTOS,需要检查并禁用
 #pragma GCC poison malloc free delay_ms delay_us delay_sec
 
+lv_style_t s_icon_font_blk;         // 标志字体style
+lv_style_t s_ui_big_font_blk;       // UI Big 字体，黑色
+lv_style_t s_ui_font_blk;           // UI 字体，黑色
+
+
+static void load_common_style(){
+    lv_style_init(&s_icon_font_blk);
+    lv_style_init(&s_ui_big_font_blk);
+    lv_style_init(&s_ui_font_blk);
+
+    lv_style_set_text_font(&s_icon_font_blk, strings::kh_fonttool_get_font(strings::ParkIcon));
+    lv_style_set_text_font(&s_ui_big_font_blk, strings::kh_fonttool_get_font(strings::ui_big_font_placebo));
+    lv_style_set_text_font(&s_ui_font_blk, strings::kh_fonttool_get_font(strings::ui_font_placebo));
+}
+
+void emerg_stop_msg_box(){
+    // Style variables should be static, global or dynamically allocated.
+    // In other words they can not be local variables in functions which are destroyed when the function exists.
+    static lv_style_t btn_style;
+    lv_obj_t * emerg_stop_msg_box = nullptr;
+    lv_style_init(&btn_style);  // Can we initialize it more than once?
+    lv_style_set_bg_color(&btn_style,lv_palette_main(LV_PALETTE_AMBER));
+    //// If parent is NULL the message box will be modal. Safe even if pressing on boot (not created on screen)
+    emerg_stop_msg_box = lv_msgbox_create(nullptr, strings::kh_fonttool_get_text(strings::WarnText), strings::kh_fonttool_get_text(strings::EmerStopText), nullptr, true);
+    lv_obj_add_style(lv_msgbox_get_title(emerg_stop_msg_box), &s_ui_font_blk, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_add_style(lv_msgbox_get_text(emerg_stop_msg_box), &s_ui_font_blk, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_text_color(lv_msgbox_get_title(emerg_stop_msg_box),lv_color_hex(0xFF5959),0);
+    lv_obj_set_style_text_color(lv_msgbox_get_text(emerg_stop_msg_box),lv_color_hex(0xFF5959),0);
+
+    lv_obj_add_style(lv_msgbox_get_close_btn(emerg_stop_msg_box), &btn_style, 0);
+
+//    lv_obj_add_flag(lv_msgbox_get_close_btn(mbox1), LV_OBJ_FLAG_HIDDEN);
+    lv_obj_center(emerg_stop_msg_box);
+}
+
 TaskHandle_t main_task_handler;
+
+lv_obj_t * ui_Screen1;
+lv_obj_t * ui_ModeLabel;
+
 [[noreturn]] void main_task(void *pvParameters) {
     log_w("Into MainTask");
 
     lv_init();                      // lvgl内核初始化
     lv_port_disp_init();            // lvgl外设初始化
+
+    strings::kh_load_all_font();                        // 字体辅助器加载字体
+    strings::kh_fonttool_set_lang(strings::Chinese);    // 设置语言
+
+    load_common_style();                                // 加载常用style
+
+    lv_disp_t * dispp = lv_disp_get_default();
+    lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
+                                               true, LV_FONT_DEFAULT);
+    lv_disp_set_theme(dispp, theme);
+
+    ui_Screen1 = lv_obj_create(nullptr);
+
+
+    ui_ModeLabel = lv_label_create(lv_scr_act());
+    lv_obj_set_width(ui_ModeLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_ModeLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_ModeLabel, 0);
+    lv_obj_set_y(ui_ModeLabel, 48);
+    lv_obj_set_align(ui_ModeLabel, LV_ALIGN_CENTER);
+//    lv_label_set_text(ui_ModeLabel, "M");
+
+    lv_label_set_text(ui_ModeLabel,strings::kh_fonttool_get_text(strings::FollowIcon));
+    lv_obj_set_style_text_color(ui_ModeLabel,lv_palette_main(LV_PALETTE_LIGHT_GREEN),0);
+
+    lv_obj_add_style(ui_ModeLabel, &s_icon_font_blk, 0);
+    lv_disp_load_scr(ui_Screen1);
+
+    emerg_stop_msg_box();
 
     while (1){
         lv_task_handler();

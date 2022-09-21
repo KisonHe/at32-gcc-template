@@ -19,6 +19,8 @@ namespace strings
     static kh_textdata_t MainData[EndOfLanguages][EndOfTexts] = {
 
         { 
+            {"", font_ui_ptr},
+            {"", font_ui_big_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
@@ -31,6 +33,8 @@ namespace strings
             {"Obstacle Detected", font_ui_ptr},
         },
         { 
+            {"", font_ui_ptr},
+            {"", font_ui_big_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
