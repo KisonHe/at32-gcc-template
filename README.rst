@@ -46,7 +46,7 @@ AT32 GCC Demo
 
 .. note::
 
-  `CLion` 添加 `Release` 编译仅需在设置中直接添加即可
+   `CLion` 添加 `Release` 编译仅需在设置中直接添加即可
 
 .. figure:: readme.asserts/AddRelease.png
     :width: 200
