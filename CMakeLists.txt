@@ -146,17 +146,10 @@ add_executable(bootloader ${BootLoaderSources} ${BOOTLOADER_LINKER_SCRIPT})
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 add_executable(${PROJECT_NAME}_BootloaderVersion.elf ${SOURCES} ${APP_BOOTLOADED_LINKER_SCRIPT})
 
-
-# 此处的 lvgl_demos 为跑 Demo 才需要链接，产品代码中可去除
-add_dependencies(${PROJECT_NAME}.elf lvgl lvgl_demos)
-add_dependencies(${PROJECT_NAME}_BootloaderVersion.elf lvgl lvgl_demos)
-target_link_libraries(${PROJECT_NAME}.elf lvgl lvgl_demos)
-target_link_libraries(${PROJECT_NAME}_BootloaderVersion.elf lvgl lvgl_demos)
-
-#add_dependencies(${PROJECT_NAME}.elf lvgl)
-#add_dependencies(${PROJECT_NAME}_BootloaderVersion.elf lvgl)
-#target_link_libraries(${PROJECT_NAME}.elf lvgl)
-#target_link_libraries(${PROJECT_NAME}_BootloaderVersion.elf lvgl)
+add_dependencies(${PROJECT_NAME}.elf lvgl)
+add_dependencies(${PROJECT_NAME}_BootloaderVersion.elf lvgl)
+target_link_libraries(${PROJECT_NAME}.elf lvgl)
+target_link_libraries(${PROJECT_NAME}_BootloaderVersion.elf lvgl)
 
 
 target_link_options(bootloader PRIVATE -T ${BOOTLOADER_LINKER_SCRIPT})

@@ -26,7 +26,6 @@ TaskHandle_t main_task_handler;
     lv_init();                      // lvgl内核初始化
     lv_port_disp_init();            // lvgl外设初始化
 
-    lv_demo_widgets();
     while (1){
         lv_task_handler();
         vTaskDelay(pdMS_TO_TICKS(5));

@@ -108,3 +108,32 @@ LVGL
     :alt: LVGL.jpg
 
     LVGL Demo 的效果
+
+mcu_font_tool
+---------
+
+.. warning::
+
+   仅支持Linux系统
+
+此demo包含本作者自写的一个lvgl的字体生成工具wrapper,受到t123yh的mcu字体生成器的启发。
+
+.. code-block:: console
+
+    git checkout mcu-font-tool-demo
+    # 必须运行更新子模组，或者自行下载 lvgl 源码放在 lib/lvgl 下
+    # 并下载 https://github.com/KisonHe/mcu_font_tool 放到 User/Src/gui/font/mcu_font_tool
+    git submodule update --init --recursive
+    # 必须在本仓库根目录
+    npm i lv_font_conv
+
+完成后，查看与修改 `User/Src/gui/font/mcu_font_config/strings.yaml`，声明需要的语言，字符串名称与对应的值，然后在 **本仓库根目录** 运行 `python User/Src/gui/font/mcu_font_tool/main.py` ，然后运行 `python User/Src/gui/font/mcu_font_tool/main.py -r`
+
+会生成对应的文件。可以参考 main_task 的使用方式使用本库。每次添加或更改文字后，都需要再次运行上述两个python命令
+
+
+接下来是Kison酱的自我推销与求大佬帮忙更新时间，诶嘿。
+
+这个工具的相对路径处理还没有弄得很好，而我也不太想更新（
+
+因此待大佬帮着update一下，诶嘿

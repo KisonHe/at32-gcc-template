@@ -1,0 +1,75 @@
+Languages:  # 语言类型, numbers must not exceed 254
+  - English
+  - Chinese
+
+Fonts:
+  - Name: ui  # 到时候就用这个访问字符串
+    TTF: asserts/font/NotoSansMonoCJKsc-Regular.otf
+    Size: 20
+    Symbol: 0123456789:!., xkmK////\\\\h  # these symbol will always be added to the font useful if printf is needed
+    bpp: 4
+  - Name: ui-big
+    TTF: asserts/font/NotoSansMonoCJKsc-Regular.otf
+    Size: 54
+    Symbol: 0123456789:!., xkmK////\\\\h
+    bpp: 4
+  - Name: icon # You can set icon as well!
+    TTF: asserts/font/MaterialIconsOutlined-Regular.otf
+    Size: 48
+    Symbol:
+    bpp: 4
+
+
+Strings:
+  - ID: ParkIcon
+    Content-all:    # all Languages 的值
+      Font: icon
+      Value: "\ue54f"
+  - ID: FollowIcon
+    Content-all:
+      Font: icon
+      Value: "\ue86c"
+  - ID: ManualIcon
+    Content-all:
+      Font: icon
+      Value: "\ue572"
+  - ID: EmergIcon
+    Content-all:
+      Font: icon
+      Value: "\ue002"
+  - ID: NotificationIcon
+    Content-all:
+      Font: icon
+      Value: "\ue004"
+  - ID: Unit
+    Content-all:
+      Font: ui
+      Value: Km
+  - ID: WarnText
+    Content-Chinese:  # Chinese Languages 的值，会覆盖Content-all（如果指定了的话）
+      Font: ui
+      Value: "警告!"
+    Content-English:
+      Font: ui
+      Value: "Warning!"
+  - ID: EmerStopText
+    Content-Chinese:
+      Font: ui
+      Value: "急停开关被按下"
+    Content-English:
+      Font: ui
+      Value: "Emergency Stop Button Pressed"
+  - ID: BootWaitText
+    Content-Chinese:
+      Font: ui
+      Value: "正在启动，请等待..."
+    Content-English:
+      Font: ui
+      Value: "Booting, please wait..."
+  - ID: ObsStopText
+    Content-Chinese:
+      Font: ui
+      Value: "前方有障碍"
+    Content-English:
+      Font: ui
+      Value: "Obstacle Detected"
