@@ -14,15 +14,15 @@ namespace strings
         const fonttype * fontptr;
     } kh_textdata_t;
     typedef enum : uint8_t{
-        English, Chinese,  EndOfLanguages
+        English, Chinese, Japanese,  EndOfLanguages
     }Language_t;
 
     typedef enum : uint16_t {
-        ui_font_placebo, ui_big_font_placebo, ParkIcon, FollowIcon, ManualIcon, EmergIcon, NotificationIcon, Unit, WarnText, EmerStopText, BootWaitText, ObsStopText,  EndOfTexts
+        ui_font_placebo, ui_big_font_placebo, ParkIcon, FollowIcon, ManualIcon, EmergIcon, NotificationIcon, Unit, WarnText, EmerStopText,  EndOfTexts
     }ID;
 
     enum FontID : uint8_t {
-        ui, ui_big, icon,  EndOfFonts
+        ui_20, ui_16, ui_big, icon,  EndOfFonts
     };
 
     /**

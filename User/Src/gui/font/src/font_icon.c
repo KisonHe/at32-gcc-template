@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 48 px
  * Bpp: 4
- * Opts: --font asserts/font/MaterialIconsOutlined-Regular.otf --symbols  --lcd --size 48 --bpp 4 --lv-include lvgl.h --format lvgl -o User/Src/gui/font/src/font_icon.c
+ * Opts: --font asserts/font/MaterialIconsOutlined-Regular.otf --symbols  --lcd --size 48 --bpp 4 --lv-include lvgl.h --format lvgl -o User/Src/gui/font/src/font_icon.c
  ******************************************************************************/
 
 #ifdef LV_LVGL_H_INCLUDE_SIMPLE

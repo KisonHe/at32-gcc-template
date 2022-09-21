@@ -6,8 +6,10 @@
 #include <stdint.h>
 #include "esp32-hal-log.h"
 
-LV_FONT_DECLARE(font_ui);
-const fonttype* font_ui_ptr = &font_ui;
+LV_FONT_DECLARE(font_ui_20);
+const fonttype* font_ui_20_ptr = &font_ui_20;
+LV_FONT_DECLARE(font_ui_16);
+const fonttype* font_ui_16_ptr = &font_ui_16;
 LV_FONT_DECLARE(font_ui_big);
 const fonttype* font_ui_big_ptr = &font_ui_big;
 LV_FONT_DECLARE(font_icon);
@@ -19,37 +21,46 @@ namespace strings
     static kh_textdata_t MainData[EndOfLanguages][EndOfTexts] = {
 
         { 
-            {"", font_ui_ptr},
+            {"", font_ui_20_ptr},
             {"", font_ui_big_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
-            {"Km", font_ui_ptr},
-            {"Warning!", font_ui_ptr},
-            {"Emergency Stop Button Pressed", font_ui_ptr},
-            {"Booting, please wait...", font_ui_ptr},
-            {"Obstacle Detected", font_ui_ptr},
+            {"Km", font_ui_20_ptr},
+            {"Warning!", font_ui_16_ptr},
+            {"Emergency Stop Button Pressed", font_ui_16_ptr},
         },
         { 
-            {"", font_ui_ptr},
+            {"", font_ui_20_ptr},
             {"", font_ui_big_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
             {"", font_icon_ptr},
-            {"Km", font_ui_ptr},
-            {"警告!", font_ui_ptr},
-            {"急停开关被按下", font_ui_ptr},
-            {"正在启动，请等待...", font_ui_ptr},
-            {"前方有障碍", font_ui_ptr},
+            {"Km", font_ui_20_ptr},
+            {"警告!", font_ui_20_ptr},
+            {"急停开关被按下", font_ui_20_ptr},
+        },
+        { 
+            {"", font_ui_20_ptr},
+            {"", font_ui_big_ptr},
+            {"", font_icon_ptr},
+            {"", font_icon_ptr},
+            {"", font_icon_ptr},
+            {"", font_icon_ptr},
+            {"", font_icon_ptr},
+            {"Km", font_ui_20_ptr},
+            {"警告!", font_ui_20_ptr},
+            {"非常停止ボタンが押されました", font_ui_16_ptr},
         },
     };
     
     static const char* FontNames[] = {  //help to load font from file system 
-        "font_ui",
+        "font_ui_20",
+        "font_ui_16",
         "font_ui_big",
         "font_icon",
     };

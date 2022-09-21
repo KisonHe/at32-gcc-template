@@ -132,8 +132,25 @@ mcu_font_tool
 会生成对应的文件。可以参考 main_task 的使用方式使用本库。每次添加或更改文字后，都需要再次运行上述两个python命令
 
 
+|Chinese| |English| |Japanese|
+
+.. |Chinese| image:: readme.asserts/Chinese.jpg
+   :width: 30%
+
+.. |English| image:: readme.asserts/English.jpg
+   :width: 30%
+
+.. |Japanese| image:: readme.asserts/Japanese.jpg
+   :width: 30%
+
+如图所示，可以显示 Icon ，可以正确处理不同语言。实际使用非常简单，使用 kh_fonttool_get_text 获得字符串，使用 kh_fonttool_get_font 获得字体
+
+Icon、语言等用法详见 `User/Src/gui/font/mcu_font_config/strings.yaml`
+
+----
+
 接下来是Kison酱的自我推销与求大佬帮忙更新时间，诶嘿。
 
-这个工具的相对路径处理还没有弄得很好，而我也不太想更新（
+这个工具的相对路径处理还没有弄得很好，相对路径有点乱，而我也不太想更新（
 
-因此待大佬帮着update一下，诶嘿
+因此待大佬帮着update一下，派蒙诶嘿
