@@ -80,3 +80,12 @@ GitVer 系列文件用于自动生成固件版本，会在 `cmake ..` 时自动�
 .. code-block:: console
 
     git checkout freertos-demo
+
+刷写固件后，可查看到log的输出。Release编译版本则不会有。
+
+.. figure:: readme.asserts/JLinkRTT.png
+    :width: 600
+    :align: center
+    :alt: JLinkRTT.png
+
+    JLinkRTT 打出的日志效果，也可前往 http://localhost:19080/ 直接查看
