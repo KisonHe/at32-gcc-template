@@ -1,0 +1,49 @@
+//
+// Created by kisonhe on 22-9-6.
+//
+
+#ifndef MAIN_BOARD_FIRMWARE_PINDEF_H
+#define MAIN_BOARD_FIRMWARE_PINDEF_H
+#include "at32f403a_407_gpio.h"
+
+#define LCD_CS_GPIO_Port GPIOA
+#define LCD_CS_Pin GPIO_PINS_4
+
+#define LCD_RES_GPIO_Port GPIOB
+#define LCD_RES_Pin GPIO_PINS_10
+
+#define LCD_DC_GPIO_Port GPIOA
+#define LCD_DC_Pin GPIO_PINS_8
+
+#define USART1_TX_GPIO_Port GPIOA
+#define USART1_TX_Pin GPIO_PINS_9
+
+#define USART1_RX_GPIO_Port GPIOA
+#define USART1_RX_Pin GPIO_PINS_10
+
+#define UASRT1_CRM_CLOCK (CRM_GPIOA_PERIPH_CLOCK)
+
+#define USART2_TX_GPIO_Port GPIOA
+#define USART2_TX_Pin GPIO_PINS_2
+
+#define USART2_RX_GPIO_Port GPIOA
+#define USART2_RX_Pin GPIO_PINS_3
+
+#define UASRT2_CRM_CLOCK (CRM_GPIOA_PERIPH_CLOCK)
+
+#define BEEP_GPIO_Port GPIOA
+#define BEEP_Pin GPIO_PINS_0
+
+#define SW_EMERG_GPIO_Port GPIOC
+#define SW_EMERG_Pin GPIO_PINS_15
+
+#define SW_LEFT_GPIO_Port GPIOC
+#define SW_LEFT_Pin GPIO_PINS_14
+
+#define SW_RIGHT_GPIO_Port GPIOA
+#define SW_RIGHT_Pin GPIO_PINS_15
+
+#define BATT_AD_GPIO_Port GPIOB
+#define BATT_AD_Pin GPIO_PINS_1
+
+#endif //MAIN_BOARD_FIRMWARE_PINDEF_H

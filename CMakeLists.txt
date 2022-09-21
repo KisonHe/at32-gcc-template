@@ -64,6 +64,9 @@ file(GLOB COMMON_SOURCES_SINGLE
         "lib/drivers/src/at32f403a_407_crm.c"
         "lib/drivers/src/at32f403a_407_misc.c"
         "lib/drivers/src/at32f403a_407_gpio.c"
+        "lib/drivers/src/at32f403a_407_dma.c"
+        "lib/drivers/src/at32f403a_407_spi.c"
+        "lib/drivers/src/at32f403a_407_tmr.c"
 
         "lib/printf/printf.c"
 
@@ -81,6 +84,7 @@ include_directories(
         lib/freertos/source/include
         lib/freertos/config
         User/Inc
+        lib/lvgl
 )
 
 # 用来检查谁用了malloc,new的重载似乎没成功
@@ -133,11 +137,26 @@ file(GLOB BootLoaderSourcesSingle
         #        "bootloader/log.cpp"
         )
 
+# 添加LVGL
+add_subdirectory(${CMAKE_SOURCE_DIR}/lib/lvgl)
+
 list(APPEND BootLoaderSources ${BootLoaderSourcesSingle})
 add_executable(bootloader ${BootLoaderSources} ${BOOTLOADER_LINKER_SCRIPT})
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 add_executable(${PROJECT_NAME}_BootloaderVersion.elf ${SOURCES} ${APP_BOOTLOADED_LINKER_SCRIPT})
+
+
+# 此处的 lvgl_demos 为跑 Demo 才需要链接，产品代码中可去除
+add_dependencies(${PROJECT_NAME}.elf lvgl lvgl_demos)
+add_dependencies(${PROJECT_NAME}_BootloaderVersion.elf lvgl lvgl_demos)
+target_link_libraries(${PROJECT_NAME}.elf lvgl lvgl_demos)
+target_link_libraries(${PROJECT_NAME}_BootloaderVersion.elf lvgl lvgl_demos)
+
+#add_dependencies(${PROJECT_NAME}.elf lvgl)
+#add_dependencies(${PROJECT_NAME}_BootloaderVersion.elf lvgl)
+#target_link_libraries(${PROJECT_NAME}.elf lvgl)
+#target_link_libraries(${PROJECT_NAME}_BootloaderVersion.elf lvgl)
 
 
 target_link_options(bootloader PRIVATE -T ${BOOTLOADER_LINKER_SCRIPT})

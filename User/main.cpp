@@ -10,14 +10,26 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+
+#include "Src/hardware/peripheral/lv_port_disp.h"
+
+#include "lvgl.h"
+#include "demos/lv_demos.h"
+
 // FreeRTOS使用systick,at32带的这几个延时会搞爆FreeRTOS,需要检查并禁用
 #pragma GCC poison malloc free delay_ms delay_us delay_sec
 
 TaskHandle_t main_task_handler;
 [[noreturn]] void main_task(void *pvParameters) {
     log_w("Into MainTask");
+
+    lv_init();                      // lvgl内核初始化
+    lv_port_disp_init();            // lvgl外设初始化
+
+    lv_demo_widgets();
     while (1){
-        vTaskDelay(pdMS_TO_TICKS(100));
+        lv_task_handler();
+        vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
 

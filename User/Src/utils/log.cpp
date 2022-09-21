@@ -10,7 +10,6 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
-//#include "../hardware/onchip/uart.h"
 
 #pragma GCC poison malloc free delay_ms delay_us delay_sec
 int log_printf(const char *format, ...)
@@ -36,7 +35,8 @@ int log_printf(const char *format, ...)
     SEGGER_RTT_printf(0, "%s", temp);
 //    hardware::uart1_instance.transmit(reinterpret_cast<uint8_t *>(temp), len + 1);
 #else
-    hardware::uart1_instance.transmit(reinterpret_cast<uint8_t *>(temp), len + 1);
+// 用户自行根据需要实现自己的打印
+//    hardware::uart1_instance.transmit(reinterpret_cast<uint8_t *>(temp), len + 1);
 #endif
 
     va_end(arg);

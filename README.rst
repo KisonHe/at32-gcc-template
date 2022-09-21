@@ -89,3 +89,22 @@ GitVer 系列文件用于自动生成固件版本，会在 `cmake ..` 时自动�
     :alt: JLinkRTT.png
 
     JLinkRTT 打出的日志效果，也可前往 http://localhost:19080/ 直接查看
+
+LVGL
+---------
+
+实现了 LVGL 的移植，不需要 demo 后自行调整 lvgl 的内存大小并去掉 lvgl_demo 的链接
+
+.. code-block:: console
+
+    git checkout lvgl-demo
+    # 必须运行更新子模组，或者自行下载 lvgl 源码放在 lib/lvgl 下
+    git submodule update --init --recursive
+
+
+.. figure:: readme.asserts/LVGL.jpg
+    :width: 600
+    :align: center
+    :alt: LVGL.jpg
+
+    LVGL Demo 的效果
