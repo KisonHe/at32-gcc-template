@@ -17,6 +17,8 @@ AT32 GCC Demo
 编译样本工程
 ************
 
+首先，按照实际的MCU型号，修改 `CMakeLists.txt` 中的 `-DAT32F403ACGT7 -DAT_START_F403A_V1` 以及 `LINKER_SCRIPT`
+
 .. code-block:: console
 
     # 编译Debug版本
@@ -61,6 +63,19 @@ AT32 GCC Demo
 
 FreeRTOS 与 BootLoader
 ----------
+
+本Demo包含了FreeRTOS,以及一些常见的库(线程安全printf、SystemView、SeggerRTT)，并通过编译类型选择性编入只有Debug需要的库。BootLoader需要注意对应的Linker脚本正确设置Flash大小、偏移量(ORIGIN = 0x多少)
+
+GitVer 系列文件用于自动生成固件版本，会在 `cmake ..` 时自动生成，如果电脑没有安装 jinja 可以在 `CMakeLists.txt` 注释相关内容或者看一下实现自己改。
+
+.. note::
+  如果MCU型号不同，还要记得修改 `bootloader` `bootloader-app` 等的linker脚本。此Demo附带的FreeRTOS 为了适配 SystemView 更改了部分内容，如有需要可自行下载干净的 FreeRTOS
+
+
+.. warning::
+
+   需要注意的是，与ESP32不同，采用 newlib 的C环境所提供的内存申请函数并 **不线程安全** ，因此，要么按照 `此文章 <https://nadler.com/embedded/newlibAndFreeRTOS.html>`_ 的建议完成newlib的回调，要么就不要再rtos里面用malloc,free,new,delete。
+  小心哦！潮水退去才知道没有裸泳！你没用，你的库(STL、printf等)会不会用了呢。此demo带有一个线程安全printf实现，详见 `此仓库 <https://github.com/mpaland/printf>`_
 
 .. code-block:: console
 

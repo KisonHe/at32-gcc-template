@@ -1,0 +1,6 @@
+/**
+ * Auto Generated File, Do NOT modify
+ *
+ */
+#pragma once
+#define GIT_VER "{{git_result}}"
