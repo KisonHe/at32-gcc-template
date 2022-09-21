@@ -47,8 +47,8 @@ void emerg_stop_msg_box(){
     lv_obj_add_style(lv_msgbox_get_title(emerg_stop_msg_box), &s_ui_font_blk, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_add_style(lv_msgbox_get_text(emerg_stop_msg_box), &s_ui_font_blk, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_set_style_text_color(lv_msgbox_get_title(emerg_stop_msg_box),lv_color_hex(0xFF5959),0);
-    lv_obj_set_style_text_color(lv_msgbox_get_text(emerg_stop_msg_box),lv_color_hex(0xFF5959),0);
+//    lv_obj_set_style_text_color(lv_msgbox_get_title(emerg_stop_msg_box),lv_color_hex(0xFF5959),0);
+//    lv_obj_set_style_text_color(lv_msgbox_get_text(emerg_stop_msg_box),lv_color_hex(0xFF5959),0);
 
     lv_obj_add_style(lv_msgbox_get_close_btn(emerg_stop_msg_box), &btn_style, 0);
 
@@ -69,6 +69,7 @@ lv_obj_t * ui_ModeLabel;
 
     strings::kh_load_all_font();                        // 字体辅助器加载字体
     strings::kh_fonttool_set_lang(strings::Chinese);    // 设置语言
+//    strings::kh_fonttool_set_lang(strings::English);    // 设置语言
 
     load_common_style();                                // 加载常用style
 
@@ -80,7 +81,7 @@ lv_obj_t * ui_ModeLabel;
     ui_Screen1 = lv_obj_create(nullptr);
 
 
-    ui_ModeLabel = lv_label_create(lv_scr_act());
+    ui_ModeLabel = lv_label_create(ui_Screen1);
     lv_obj_set_width(ui_ModeLabel, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_ModeLabel, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_ModeLabel, 0);
@@ -88,8 +89,8 @@ lv_obj_t * ui_ModeLabel;
     lv_obj_set_align(ui_ModeLabel, LV_ALIGN_CENTER);
 //    lv_label_set_text(ui_ModeLabel, "M");
 
-    lv_label_set_text(ui_ModeLabel,strings::kh_fonttool_get_text(strings::FollowIcon));
-    lv_obj_set_style_text_color(ui_ModeLabel,lv_palette_main(LV_PALETTE_LIGHT_GREEN),0);
+    lv_label_set_text(ui_ModeLabel,strings::kh_fonttool_get_text(strings::EmergIcon));
+    lv_obj_set_style_text_color(ui_ModeLabel,lv_palette_main(LV_PALETTE_RED),0);
 
     lv_obj_add_style(ui_ModeLabel, &s_icon_font_blk, 0);
     lv_disp_load_scr(ui_Screen1);
