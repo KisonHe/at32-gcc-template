@@ -36,7 +36,7 @@ int log_printf(const char *format, ...)
     SEGGER_RTT_printf(0, "%s", temp);
 //    hardware::uart1_instance.transmit(reinterpret_cast<uint8_t *>(temp), len + 1);
 #else
-    hardware::uart1_instance.transmit(reinterpret_cast<uint8_t *>(temp), len + 1);
+    // hardware::uart1_instance.transmit(reinterpret_cast<uint8_t *>(temp), len + 1);
 #endif
 
     va_end(arg);

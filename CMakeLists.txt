@@ -52,6 +52,24 @@ add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-le
 # 按照实际MCU型号修改
 add_compile_options(-DEMBEDDED -DAT32F403ACGT7 -DAT_START_F403A_V1 -DUSE_STDPERIPH_DRIVER)
 
+
+add_library(FreeRTOS STATIC
+        lib/freertos/source/event_groups.c
+        lib/freertos/source/list.c
+        lib/freertos/source/queue.c
+        lib/freertos/source/stream_buffer.c
+        lib/freertos/source/tasks.c
+        lib/freertos/source/timers.c
+        lib/freertos/source/portable/GCC/ARM_CM4F/port.c
+        lib/freertos/source/portable/memmang/heap_4.c
+        lib/freertos/source/portable/common/mpu_wrappers.c
+        )
+
+target_include_directories(FreeRTOS PUBLIC
+        lib/freertos/config
+        lib/freertos/source/portable/GCC/ARM_CM4F
+        lib/freertos/source/include)
+
 file(GLOB APP_MAIN "User/main.cpp")
 
 file(GLOB_RECURSE COMMON_SOURCES_R "User/Src/*.*")
@@ -69,8 +87,6 @@ file(GLOB COMMON_SOURCES_SINGLE
 
         "lib/cmsis/cm4/device_support/system_at32f403a_407.c"
         "lib/cmsis/cm4/device_support/startup/gcc/startup_at32f403a_407.s"
-        "lib/freertos/source/portable/memmang/heap_4.c" "lib/freertos/source/portable/GCC/ARM_CM4F/port.c"
-        "lib/freertos/source/portable/common/mpu_wrappers.c"
         )
 
 include_directories(
@@ -78,8 +94,7 @@ include_directories(
         User/Src/utils/Config
         lib/drivers/inc
         lib/cmsis/cm4/core_support lib/cmsis/cm4/device_support lib/core
-        lib/freertos/source/include
-        lib/freertos/config
+        lib/freertos/source/include lib/freertos/config
         User/Inc
 )
 
@@ -130,7 +145,6 @@ file(GLOB BootLoaderSourcesSingle
         "lib/drivers/src/at32f403a_407_misc.c"
         "lib/cmsis/cm4/device_support/system_at32f403a_407.c"
         "lib/core/*.*"
-        #        "bootloader/log.cpp"
         )
 
 list(APPEND BootLoaderSources ${BootLoaderSourcesSingle})
@@ -147,6 +161,8 @@ target_link_options(${PROJECT_NAME}_BootloaderVersion.elf PRIVATE -T ${APP_BOOTL
 target_include_directories(${PROJECT_NAME}.elf PUBLIC "lib/SeggerRTT/RTT" "lib/SeggerRTT/Config")
 target_include_directories(${PROJECT_NAME}_BootloaderVersion.elf PUBLIC "lib/SeggerRTT/RTT" "lib/SeggerRTT/Config")
 
+target_link_libraries(${PROJECT_NAME}.elf FreeRTOS)
+target_link_libraries(${PROJECT_NAME}_BootloaderVersion.elf FreeRTOS)
 
 # For Bootloader's NVIC
 set_target_properties(${PROJECT_NAME}_BootloaderVersion.elf PROPERTIES COMPILE_FLAGS "-DCORE_DEBUG_LEVEL=ARDUHAL_LOG_LEVEL_VERBOSE -DLOG_LOCAL_LEVEL=ESP_LOG_VERBOSE -DBOOTLOADERVERAPP -DFLASH_APP1_ADDR=0x08020000 -DAT32_FLASH_BASE=0x08000000")
